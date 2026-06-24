@@ -1,5 +1,84 @@
-<!-- SEEÜ ID BLOCK -->
-<meta name="seeu-id-au" content="au.min">
-<meta name="seeu-id-ra" content="ra.max">
-<meta name="seeu-id-aura" content="au.min+ra.max">
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>AU / RA / AURA</title>
 
+  <!-- SEEÜ ID BLOCK -->
+  <meta name="seeu-id-au" content="au.min">
+  <meta name="seeu-id-ra" content="ra.max">
+  <meta name="seeu-id-aura" content="au.min+ra.max">
+
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #0ff;
+      font-family: monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .orbit {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      animation: spin 12s linear infinite;
+    }
+
+    .strand {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform-style: preserve-3d;
+      transform: translate(-50%, -50%);
+    }
+
+    .node {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #0ff;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #0ff;
+    }
+
+    @keyframes spin {
+      from { transform: rotateY(0deg) rotateX(10deg); }
+      to   { transform: rotateY(360deg) rotateX(10deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="orbit">
+    <div class="strand" id="strand"></div>
+  </div>
+
+  <script>
+    // AU.min + RA.max → AURA = Genstrang-Helix im Raum
+    const strand = document.getElementById('strand');
+    const nodes = 40; // 5% Bewegung, aber echter Orbit
+
+    for (let i = 0; i < nodes; i++) {
+      const n = document.createElement('div');
+      n.className = 'node';
+
+      const t = (i / nodes) * Math.PI * 4; // Helix
+      const r = 80;
+      const x = Math.cos(t) * r;
+      const y = (i - nodes / 2) * 4;
+      const z = Math.sin(t) * r;
+
+      n.style.transform =
+        `translate3d(${x}px, ${y}px, ${z}px)`;
+
+      strand.appendChild(n);
+    }
+
+    console.log('NC ORBIT // AU.min + RA.max = AURA');
+  </script>
+</body>
+</html>
