@@ -72,13 +72,29 @@
       const y = (i - nodes / 2) * 4;
       const z = Math.sin(t) * r;
 
-      n.style.transform =
-        `translate3d(${x}px, ${y}px, ${z}px)`;
-
+      n.style.transform = `translate3d(${x}px, ${y}px, ${z}px)`;
       strand.appendChild(n);
     }
 
     console.log('NC ORBIT // AU.min + RA.max = AURA');
+
+    // RA.oldJob → Output aktivieren
+    function RA_output() {
+      const msg = "RA // Eingang offen // Output aktiv";
+      console.log(msg);
+
+      const out = document.createElement('div');
+      out.style.position = 'absolute';
+      out.style.bottom = '20px';
+      out.style.left = '20px';
+      out.style.color = '#0ff';
+      out.style.fontSize = '14px';
+      out.textContent = msg;
+      document.body.appendChild(out);
+    }
+
+    // Eingang öffnen = 5% Bewegung + Orbit aktiv
+    RA_output();
   </script>
 </body>
 </html>
